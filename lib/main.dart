@@ -20,6 +20,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _Home extends State<HomePage> {
+  // This string will hold what is being typed by apppending at the end on each key press
+  String value = "";
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -37,7 +39,7 @@ class _Home extends State<HomePage> {
                   decoration: BoxDecoration(border: Border.all(width: 2)),
                   child: Center(
                     child: Text(
-                      "Value goes here",
+                      value,
                       style: TextStyle(fontSize: 30, color: Colors.red),
                     ),
                   )),
@@ -89,7 +91,13 @@ class _Home extends State<HomePage> {
         padding: EdgeInsets.all(10),
         child: RaisedButton(
           child: Text("CLEAR"),
-          onPressed: () {},
+          onPressed: () {
+            setState(() {
+              setState(() {
+                value = "";
+              });
+            });
+          },
         ),
       ),
     ];
@@ -99,7 +107,11 @@ class _Home extends State<HomePage> {
           padding: EdgeInsets.all(10),
           child: RaisedButton(
             child: Text("$i"),
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                value += "$i";
+              });
+            },
           ),
         ),
       );
