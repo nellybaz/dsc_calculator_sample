@@ -12,9 +12,3 @@ getScreen(String value) {
         ),
       ));
 }
-
-// void main() => runApp(Screen);
-
-// class Screen extends StatefulWidget{
-
-// }
