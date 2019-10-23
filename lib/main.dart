@@ -22,6 +22,10 @@ class HomePage extends StatefulWidget {
 
 class _Home extends State<HomePage> {
   // This string will hold what is being typed by apppending at the end on each key press
+
+  // When an operand is pressed, the current value of value is captured as num1,
+  // then num2 will be captured when "=" key is pressed
+
   String value = "0";
   int num1, num2;
   String op;
@@ -37,7 +41,7 @@ class _Home extends State<HomePage> {
         body: Center(
           child: Column(
             children: [
-              get_screen(value),
+              getScreen(value),
               Wrap(children: makeButtons()),
             ],
           ),
@@ -66,8 +70,8 @@ class _Home extends State<HomePage> {
           child: Text("0"),
           onPressed: () {
             setState(() {
-              if (value == "0" || is_operand(value)) {
-                  value = "";
+              if (value == "0" || isOperand(value)) {
+                value = "";
               }
               value += "0";
             });
@@ -141,7 +145,7 @@ class _Home extends State<HomePage> {
             child: Text("$i"),
             onPressed: () {
               setState(() {
-                if (value == "0" || is_operand(value)) {
+                if (value == "0" || isOperand(value)) {
                   value = "";
                 }
                 value += "$i";
@@ -155,7 +159,7 @@ class _Home extends State<HomePage> {
     return btns + btns2;
   }
 
-  bool is_operand(String value) {
+  bool isOperand(String value) {
     return value == "+" || value == "*" || value == "-" || value == "/";
   }
 }
