@@ -20,8 +20,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _Home extends State<HomePage> {
+
   // This string will hold what is being typed by apppending at the end on each key press
-  String value = "";
+  String value = "0";
+  int num1, num2;
+  String op;
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -56,35 +60,71 @@ class _Home extends State<HomePage> {
         padding: EdgeInsets.all(10),
         child: RaisedButton(
           child: Text("+"),
-          onPressed: () {},
+          onPressed: () {
+            num1 = int.parse(value);
+            op = "+";
+            setState(() {
+              value = op;
+            });
+          },
         ),
       ),
       Padding(
         padding: EdgeInsets.all(10),
         child: RaisedButton(
           child: Text("0"),
-          onPressed: () {},
+          onPressed: () {
+            setState(() {
+              value += "0";
+            });
+          },
         ),
       ),
       Padding(
         padding: EdgeInsets.all(10),
         child: RaisedButton(
           child: Text("="),
-          onPressed: () {},
+          onPressed: () {
+            num2 = int.parse(value);
+
+            setState(() {
+              if (op == "+") {
+                value = (num1 + num2).toString();
+              } else if(op == "/"){
+                value = (num1 / num2).toString();
+              }
+              else {
+                value = (num1 * num2).toString();
+              }
+            });
+            
+          },
         ),
       ),
       Padding(
         padding: EdgeInsets.all(10),
         child: RaisedButton(
           child: Text("*"),
-          onPressed: () {},
+          onPressed: () {
+            num1 = int.parse(value);
+            op = "*";
+            setState(() {
+              value = op;
+            });
+          },
         ),
       ),
       Padding(
         padding: EdgeInsets.all(10),
         child: RaisedButton(
           child: Text("/"),
-          onPressed: () {},
+          onPressed: () {
+            num1 = int.parse(value);
+            op = "/";
+            setState(() {
+              value = op;
+            });
+          },
         ),
       ),
       Padding(
@@ -94,7 +134,7 @@ class _Home extends State<HomePage> {
           onPressed: () {
             setState(() {
               setState(() {
-                value = "";
+                value = "0";
               });
             });
           },
@@ -109,6 +149,9 @@ class _Home extends State<HomePage> {
             child: Text("$i"),
             onPressed: () {
               setState(() {
+                if (value == "0" || value == "+" || value == "*" || value == "/"){
+                  value = "";
+                }
                 value += "$i";
               });
             },
