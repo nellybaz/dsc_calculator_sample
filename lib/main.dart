@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'screen.dart';
 
 main() {
   runApp(Calculator());
@@ -20,7 +21,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _Home extends State<HomePage> {
-
   // This string will hold what is being typed by apppending at the end on each key press
   String value = "0";
   int num1, num2;
@@ -37,16 +37,7 @@ class _Home extends State<HomePage> {
         body: Center(
           child: Column(
             children: [
-              Container(
-                  width: double.infinity,
-                  height: 80,
-                  decoration: BoxDecoration(border: Border.all(width: 2)),
-                  child: Center(
-                    child: Text(
-                      value,
-                      style: TextStyle(fontSize: 30, color: Colors.red),
-                    ),
-                  )),
+              get_screen(value),
               Wrap(children: makeButtons()),
             ],
           ),
@@ -75,6 +66,9 @@ class _Home extends State<HomePage> {
           child: Text("0"),
           onPressed: () {
             setState(() {
+              if (value == "0" || is_operand(value)) {
+                  value = "";
+              }
               value += "0";
             });
           },
@@ -90,14 +84,12 @@ class _Home extends State<HomePage> {
             setState(() {
               if (op == "+") {
                 value = (num1 + num2).toString();
-              } else if(op == "/"){
+              } else if (op == "/") {
                 value = (num1 / num2).toString();
-              }
-              else {
+              } else {
                 value = (num1 * num2).toString();
               }
             });
-            
           },
         ),
       ),
@@ -149,7 +141,7 @@ class _Home extends State<HomePage> {
             child: Text("$i"),
             onPressed: () {
               setState(() {
-                if (value == "0" || value == "+" || value == "*" || value == "/"){
+                if (value == "0" || is_operand(value)) {
                   value = "";
                 }
                 value += "$i";
@@ -161,5 +153,9 @@ class _Home extends State<HomePage> {
     }
 
     return btns + btns2;
+  }
+
+  bool is_operand(String value) {
+    return value == "+" || value == "*" || value == "-" || value == "/";
   }
 }
